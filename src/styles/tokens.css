@@ -1,0 +1,43 @@
+:root {
+  --red: #c62828;
+  --red-deep: #8e1b1b;
+  --red-bright: #e2402f;
+  --yellow: #f4ce46;
+  --yellow-deep: #d9a92b;
+  --paper: #f3e8cc;
+  --paper-warm: #efe1c0;
+  --paper-dim: #e3d3ad;
+  --ink: #242019;
+  --ink-soft: #4a4238;
+  --green: #347a48;
+  --green-deep: #245734;
+  --orange: #e67e22;
+  --cream: #fff9ec;
+
+  --font-display: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Heiti SC',
+    'SimHei', sans-serif;
+  --font-body: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', 'Hiragino Sans GB', sans-serif;
+  --font-number: 'Oswald', 'Impact', 'Arial Narrow', 'Microsoft YaHei', sans-serif;
+
+  --shadow-hard: 6px 6px 0 rgba(36, 32, 25, 0.9);
+  --shadow-hard-sm: 3px 3px 0 rgba(36, 32, 25, 0.85);
+  --shadow-soft: 0 18px 38px rgba(36, 32, 25, 0.22);
+  --border-ink: 3px solid var(--ink);
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 34px;
+  --space-6: 48px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-mid: 320ms;
+  --dur-slow: 620ms;
+}

@@ -1,0 +1,753 @@
+/* ───────────── 电视剧舞台 ───────────── */
+.stage {
+  position: relative;
+  width: 100%;
+}
+
+.stage__bezel {
+  position: relative;
+  padding: 14px 14px 10px;
+  border-radius: 24px 24px 18px 18px;
+  border: 3px solid #16120e;
+  background:
+    linear-gradient(165deg, #4b4136 0%, #2a241d 38%, #17130f 100%);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.16) inset,
+    0 -3px 0 rgba(0, 0, 0, 0.5) inset,
+    0 26px 50px rgba(0, 0, 0, 0.45);
+}
+
+.stage__screen {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #100d0a;
+  box-shadow:
+    0 0 0 5px #0c0907,
+    0 0 0 7px rgba(244, 206, 70, 0.14),
+    0 0 70px rgba(0, 0, 0, 0.65) inset;
+  isolation: isolate;
+}
+
+.scene-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stage__grade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 187, 92, 0.12), rgba(0, 0, 0, 0) 38%, rgba(30, 18, 8, 0.28)),
+    radial-gradient(ellipse at 50% 40%, rgba(255, 231, 173, 0.1), transparent 62%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.stage__character {
+  position: absolute;
+  bottom: -3.5%;
+  height: 96%;
+  z-index: 3;
+  transform-origin: bottom center;
+  animation: char-enter 420ms var(--ease-out) both;
+  filter: drop-shadow(0 16px 22px rgba(20, 10, 0, 0.4));
+  pointer-events: none;
+}
+
+.stage__character.side-right {
+  right: 3.5%;
+}
+
+.stage__character.side-left {
+  left: 5%;
+}
+
+.stage__character .character-sprite {
+  height: 100%;
+  width: auto;
+}
+
+@keyframes char-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.stage__scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.18) 0px,
+    rgba(0, 0, 0, 0.18) 1px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0) 3px
+  );
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+.stage__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 46%, transparent 46%, rgba(10, 6, 2, 0.5) 100%);
+}
+
+.stage__corner {
+  position: absolute;
+  top: 12px;
+  z-index: 9;
+  font-family: var(--font-number);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 249, 236, 0.72);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+.stage__corner.is-left {
+  left: 14px;
+}
+
+.stage__corner.is-right {
+  right: 14px;
+}
+
+.stage__rec {
+  animation: blink 2.4s steps(2, end) infinite;
+  color: #ff6b5e;
+  font-weight: 700;
+}
+
+.stage__stand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px 0;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: rgba(243, 232, 204, 0.5);
+  text-transform: uppercase;
+}
+
+.stage__led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff6b5e;
+  box-shadow: 0 0 10px #ff6b5e;
+  animation: blink 3s steps(2, end) infinite;
+}
+
+/* ───────────── 对白 ───────────── */
+.dialogue {
+  position: absolute;
+  left: 3.2%;
+  right: 3.2%;
+  bottom: 3.4%;
+  z-index: 20;
+  padding: 16px 20px 18px;
+  border: 2px solid rgba(244, 206, 70, 0.55);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(22, 18, 13, 0.92), rgba(16, 13, 9, 0.96));
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 249, 236, 0.12);
+  color: var(--cream);
+  animation: dialogue-in 220ms var(--ease-out) both;
+}
+
+@keyframes dialogue-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dialogue__name {
+  position: absolute;
+  top: -17px;
+  left: 12px;
+  padding: 3px 16px 4px;
+  border: 2px solid var(--ink);
+  border-radius: 5px;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  transform: rotate(-1.2deg);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dialogue__name.is-narrator-name {
+  background: var(--ink);
+  color: var(--yellow);
+  border-color: var(--yellow);
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  padding: 4px 12px 5px;
+}
+
+.dialogue__text {
+  font-size: clamp(16px, 1.62vw, 23px);
+  line-height: 1.62;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  min-height: 2.4em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.dialogue.is-narrator .dialogue__text {
+  color: #ffe6a8;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.dialogue__caret {
+  display: inline-block;
+  width: 0.52em;
+  height: 1.02em;
+  margin-left: 3px;
+  vertical-align: -0.14em;
+  background: var(--yellow);
+  animation: caret 0.8s steps(2, end) infinite;
+}
+
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.dialogue__next {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  font-size: 13px;
+  color: var(--yellow);
+  animation: next-bounce 1.4s ease-in-out infinite;
+}
+
+@keyframes next-bounce {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* 大字报式台词 */
+.dialogue.is-dramatic {
+  left: 10%;
+  right: 10%;
+  bottom: 16%;
+  padding: 26px 30px 30px;
+  background: var(--paper);
+  border: 5px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 10px 10px 0 rgba(36, 32, 25, 0.85);
+  transform: rotate(-1.6deg);
+  animation: slam-in 460ms var(--ease-out) both;
+}
+
+.dialogue.is-dramatic .dialogue__text {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(24px, 3.4vw, 46px);
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-shadow: 3px 3px 0 rgba(244, 206, 70, 0.65);
+}
+
+.dialogue.style-shout .dialogue__text {
+  color: var(--red);
+}
+
+.dialogue.style-poster .dialogue__text {
+  transform: rotate(0.6deg);
+}
+
+.dialogue.is-dramatic .dialogue__name {
+  top: -20px;
+  font-size: 13px;
+  background: var(--red) !important;
+}
+
+.dialogue.style-whisper {
+  border-color: rgba(255, 249, 236, 0.3);
+}
+
+.dialogue.style-whisper .dialogue__text {
+  color: rgba(255, 249, 236, 0.75);
+  font-style: italic;
+  font-size: clamp(14px, 1.35vw, 19px);
+}
+
+.dialogue.style-caption .dialogue__text {
+  text-align: center;
+  color: var(--yellow);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+@keyframes slam-in {
+  from {
+    opacity: 0;
+    transform: rotate(-7deg) scale(1.35);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-1.6deg) scale(1);
+  }
+}
+
+/* ───────────── 剧情结果卡 ───────────── */
+.consequence {
+  position: absolute;
+  z-index: 24;
+  left: 8%;
+  right: 8%;
+  top: 4%;
+  bottom: auto;
+  padding: 16px 20px 18px;
+  background: var(--cream);
+  border: 4px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 9px 9px 0 rgba(36, 32, 25, 0.85);
+  transform: rotate(0.8deg);
+  animation: consequence-in 320ms var(--ease-out) both;
+}
+
+.consequence__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 3px dashed rgba(36, 32, 25, 0.35);
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.consequence__delta {
+  padding: 3px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-number);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+}
+
+.consequence__delta.is-down {
+  background: var(--red);
+  color: var(--cream);
+}
+
+.consequence__delta.is-up {
+  background: var(--green);
+  color: var(--cream);
+}
+
+.consequence p {
+  font-size: clamp(14px, 1.4vw, 19px);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+@keyframes consequence-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) rotate(3deg) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0.8deg) scale(1);
+  }
+}
+
+/* ───────────── 结局召唤 ───────────── */
+.ending-call {
+  position: absolute;
+  z-index: 26;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 26px 34px;
+  background: rgba(20, 16, 12, 0.9);
+  border: 3px solid var(--yellow);
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  animation: card-in 420ms var(--ease-out) both;
+  text-align: center;
+}
+
+.ending-call p {
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.6vw, 22px);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+/* ───────────── 演出特效 ───────────── */
+.fx-shake .stage__screen {
+  animation: fx-shake 620ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes fx-shake {
+  10%,
+  90% {
+    transform: translate3d(-2px, 1px, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(4px, -2px, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-7px, 2px, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(7px, -1px, 0);
+  }
+}
+
+.fx-glitch .stage__screen {
+  animation: fx-glitch 700ms steps(2, end) both;
+}
+
+@keyframes fx-glitch {
+  0% {
+    filter: none;
+  }
+  12% {
+    filter: hue-rotate(14deg) saturate(1.6);
+    transform: translateX(-3px);
+  }
+  22% {
+    filter: invert(0.06) contrast(1.2);
+    transform: translateX(4px);
+  }
+  36% {
+    filter: saturate(2) brightness(0.85);
+    transform: translateX(-6px) skewX(0.6deg);
+  }
+  52% {
+    filter: none;
+    transform: none;
+  }
+  68% {
+    filter: contrast(1.3) hue-rotate(-8deg);
+    transform: translateX(3px);
+  }
+  100% {
+    filter: none;
+    transform: none;
+  }
+}
+
+.fx-blackout .stage__screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: #05070a;
+  animation: fx-blackout 1500ms ease-in-out both;
+  pointer-events: none;
+}
+
+@keyframes fx-blackout {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  34% {
+    opacity: 0.35;
+  }
+  46% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fx-lightson .stage__screen::after,
+.fx-flash .stage__screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  background: #fff8e6;
+  animation: fx-flash 900ms ease-out both;
+  pointer-events: none;
+}
+
+@keyframes fx-flash {
+  0% {
+    opacity: 0.9;
+  }
+  28% {
+    opacity: 0.12;
+  }
+  44% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fx-zoom .stage__character {
+  animation: fx-zoom 900ms var(--ease-out) both;
+}
+
+@keyframes fx-zoom {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.16) translateY(2%);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fx-freeze .stage__screen {
+  animation: fx-freeze 1200ms steps(3, end) both;
+}
+
+@keyframes fx-freeze {
+  0%,
+  20% {
+    filter: grayscale(0.7) contrast(1.2);
+  }
+  40% {
+    filter: none;
+  }
+  60% {
+    filter: grayscale(1) contrast(1.35);
+    transform: scale(1.01);
+  }
+  100% {
+    filter: none;
+    transform: none;
+  }
+}
+
+/* ───────────── 集数转场卡 ───────────── */
+.episode-card {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: #0d0a07;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.episode-card__noise {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px),
+    radial-gradient(circle at 50% 45%, rgba(244, 206, 70, 0.12), transparent 60%);
+  animation: station-flicker 5s ease-in-out infinite;
+}
+
+.episode-card__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 24px;
+  animation: station-in 600ms var(--ease-out) both;
+}
+
+.episode-card__index {
+  font-family: var(--font-number);
+  font-size: clamp(14px, 1.6vw, 20px);
+  letter-spacing: 0.5em;
+  color: var(--yellow);
+  padding: 4px 14px;
+  border: 2px solid var(--yellow);
+}
+
+.episode-card__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(30px, 5vw, 68px);
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  text-shadow: 4px 4px 0 var(--red), 8px 8px 0 rgba(0, 0, 0, 0.5);
+  line-height: 1.15;
+  margin: 6px 0;
+}
+
+.episode-card__line {
+  font-size: clamp(12px, 1.3vw, 16px);
+  letter-spacing: 0.12em;
+  color: rgba(243, 232, 204, 0.66);
+}
+
+.episode-card__end {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(18px, 2vw, 26px);
+  letter-spacing: 0.5em;
+  color: var(--yellow);
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+.episode-card__hook {
+  font-size: clamp(12px, 1.4vw, 17px);
+  color: var(--paper);
+  opacity: 0.85;
+  letter-spacing: 0.08em;
+}
+
+.episode-card__skip {
+  position: absolute;
+  bottom: -64px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: rgba(243, 232, 204, 0.4);
+  animation: blink 3s ease-in-out infinite;
+}
+
+@keyframes station-flicker {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  46% {
+    opacity: 0.85;
+  }
+  48% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  52% {
+    opacity: 0.6;
+  }
+  54% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes station-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .stage__bezel {
+    padding: 9px 9px 7px;
+    border-radius: 16px;
+  }
+
+  .stage__character {
+    height: 88%;
+    bottom: -2%;
+  }
+
+  .dialogue {
+    left: 2.5%;
+    right: 2.5%;
+    bottom: 2.5%;
+    padding: 12px 14px 20px;
+  }
+
+  .dialogue__text {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .dialogue__name {
+    font-size: 12px;
+    padding: 2px 10px 3px;
+    top: -13px;
+  }
+
+  .dialogue.is-dramatic {
+    left: 6%;
+    right: 6%;
+    bottom: 14%;
+    padding: 18px 18px 22px;
+  }
+
+  .consequence {
+    left: 4%;
+    right: 4%;
+    top: 3%;
+    bottom: auto;
+    padding: 12px 14px;
+  }
+
+  .consequence p {
+    font-size: 13px;
+  }
+
+  .ending-call {
+    padding: 18px 20px;
+    width: 84%;
+  }
+
+  .episode-card__skip {
+    bottom: -48px;
+  }
+}
